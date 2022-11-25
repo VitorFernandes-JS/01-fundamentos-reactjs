@@ -1,4 +1,7 @@
 .header {
-    background-color: #333;
+    background-color: var(--gray-800);
+    display: flex;
+    justify-content: center;
     height: 80px;
+    padding: 1.25rem 0;
 }
