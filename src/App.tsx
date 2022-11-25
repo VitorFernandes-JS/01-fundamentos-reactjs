@@ -1,7 +1,13 @@
-function App() {
+import { Teste } from "./teste"
+
+import "./styles.css"
+
+export function App() {
   return (
-    <h1>teste</h1>
+    <div>
+      <h1>teste</h1>
+      <Teste author="teste1" teste={1} />
+    </div>
   )
 }
 
-export default App
