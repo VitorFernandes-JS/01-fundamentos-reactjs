@@ -5,3 +5,8 @@
     height: 80px;
     padding: 1.25rem 0;
 }
+
+.header img {
+    height: 2.5rem;
+    margin-right: 1rem;
+}
