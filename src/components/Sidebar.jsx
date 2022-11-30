@@ -13,7 +13,6 @@ export function Sidebar() {
         <img
           className={styles.avatar}
           src="https://github.com/Vitor-php.png"
-          alt="Foto de perfil"
         />
         <strong>Vitor Fernandes</strong>
         <span>Web Developer</span>
