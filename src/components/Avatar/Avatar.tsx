@@ -1,7 +1,7 @@
 import styles from './Avatar.module.css';
 
-export function components() {
+export function Avatar(props: any) {
   return (
-     <h1></h1>
+    <img className={styles.avatar} src={props.src} />
     );
 }
