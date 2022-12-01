@@ -1,6 +1,6 @@
 import styles from "./Header.module.css"
 
-import reactLogo from "../assets/react-logo.svg"
+import reactLogo from "../../assets/react-logo.svg"
 
 export function Header() {
     return (

@@ -1,5 +1,5 @@
 import styles from "./Post.module.css";
-import { Comment } from "./Comment";
+import { Comment } from "../Comment/Comment";
 
 export function Post() {
   return (
