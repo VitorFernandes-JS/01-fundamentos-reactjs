@@ -22,10 +22,22 @@ export function Post() {
 
       <div className={styles.content}>
         <p>Olá!</p>
-        <p><a href="">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></p>
+        <p>
+          <a href="">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </a>
+        </p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
       </div>
+
+      <form className={styles.commentForm}>
+        <strong>Deixe seu feedback</strong>
+
+        <textarea placeholder="Comente aqui" />
+
+          <button type="submit">Comentar</button>
+      </form>
     </article>
   );
 }
