@@ -19,6 +19,7 @@
 }
 
 .content a {
+    margin: 1rem;
     font-weight: bold;
     color: var(--blue-500);
     text-decoration: none;

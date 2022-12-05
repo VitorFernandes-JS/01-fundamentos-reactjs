@@ -37,7 +37,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
     if (item.type === "paragraph") {
       return <p>{item.content}</p>;
     }
-    return <a href="https://www.google.com.br">{item.content}</a>;
+    return <a href="#">{item.content}</a>;
   });
 
   return (
