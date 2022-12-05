@@ -1,34 +1,65 @@
+import { format, formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
+
 import styles from "./Post.module.css";
 import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
 
-export function Post() {
+interface PostProps {
+  author: {
+    avatarUrl: string;
+    name: string;
+    role: string;
+  };
+  content: {
+    type: string;
+    content: string;
+  }[];
+  publishedAt: Date;
+}
+
+export function Post({ author, content, publishedAt }: PostProps) {
+  const publishedDateFormatted = format(
+    publishedAt,
+    "dd 'de' LLLL 'às' HH:mm'h'",
+    {
+      locale: ptBR,
+    }
+  );
+
+  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
+    locale: ptBR,
+    addSuffix: true,
+  });
+
+  // condição para formatar o conteúdo do post, se o texto é um link ou um parágrafo em si
+  const contentFormatted = content.map((item) => {
+    if (item.type === "paragraph") {
+      return <p>{item.content}</p>;
+    }
+    return <a href="https://www.google.com.br">{item.content}</a>;
+  });
+
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <Avatar hasBorder src="https://github.com/Vitor-php.png"/>
+          <Avatar hasBorder src={author.avatarUrl} />
           <div className={styles.authorInfo}>
-            <strong>Vitor Fernandes</strong>
-            <span>Web Developer</span>
+            <strong>{author.name}</strong>
+            <span>{author.role}</span>
           </div>
         </div>
 
-        <time title="11 de Maio às 08:13h" dateTime="2022-05-11 08:13:30">
-          Publicado há 1h
+        <time
+          title={publishedDateFormatted}
+          dateTime={publishedAt.toISOString()}
+        >
+          {publishedDateRelativeToNow}
         </time>
       </header>
 
-      <div className={styles.content}>
-        <p>Olá!</p>
-        <p>
-          <a href="">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </a>
-        </p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-      </div>
+      <div className={styles.content}>{contentFormatted}</div>
 
       <form className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>

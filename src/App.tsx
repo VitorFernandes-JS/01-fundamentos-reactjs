@@ -5,6 +5,59 @@ import { Post } from "./components/Post/Post";
 import "./global.css";
 import styles from "./App.module.css";
 
+const posts = [
+  {
+    id: 1,
+    author: {
+      avatarUrl: "https://github.com/Vitor-php.png",
+      name: "Vitor Fernandes",
+      role: "Front-end Developer",
+    },
+    content: [
+      { type: "paragraph", content: "Olá!" },
+      {
+        type: "paragraph",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        type: "paragraph",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        type: "paragraph",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      { type: "link", content: "teste</a>" },
+    ],
+    publishedAt: new Date("2022-12-05 08:13:30"),
+  },
+  {
+    id: 2,
+    author: {
+      avatarUrl: "https://github.com/reis0694.png",
+      name: "Isabella Reis",
+      role: "Front-end Developer",
+    },
+    content: [
+      { type: "paragraph", content: "Olá, Rede!" },
+      {
+        type: "paragraph",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        type: "paragraph",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      {
+        type: "paragraph",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      },
+      { type: "link", content: "teste1111111</a>" },
+    ],
+    publishedAt: new Date("2022-12-16 11:13:30"),
+  },
+];
+
 export function App() {
   return (
     <div>
@@ -13,9 +66,15 @@ export function App() {
       <div className={styles.wrapper}>
         <Sidebar />
         <main>
-          <Post />
-          <Post />
-          <Post />
+          {posts.map((post) => {
+            return (
+              <Post
+                author={post.author}
+                content={post.content}
+                publishedAt={post.publishedAt}
+              />
+            );
+          })}
         </main>
       </div>
     </div>
