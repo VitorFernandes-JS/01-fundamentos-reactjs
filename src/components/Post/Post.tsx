@@ -4,6 +4,7 @@ import { ptBR } from "date-fns/locale";
 import styles from "./Post.module.css";
 import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
+import { useState } from "react";
 
 interface PostProps {
   author: {
@@ -19,6 +20,9 @@ interface PostProps {
 }
 
 export function Post({ author, content, publishedAt }: PostProps) {
+  const [comments, setComments] = useState([]);
+  const [newCommentText, setNewCommentText] = useState("");
+
   const publishedDateFormatted = format(
     publishedAt,
     "dd 'de' LLLL 'às' HH:mm'h'",
@@ -39,6 +43,16 @@ export function Post({ author, content, publishedAt }: PostProps) {
     }
     return <a href="#">{item.content}</a>;
   });
+
+  function handleCreateNewComment() {
+    event.preventDefault(); // previne o comportamento padrão do form, que é recarregar a página
+    setComments([...comments, newCommentText]); // adiciona um novo comentário
+    setNewCommentText(""); // limpa o input
+  }
+
+  function handleNewCommentChange() {
+    setNewCommentText(event.target.value); // pega o valor do input e adiciona no estado
+  }
 
   return (
     <article className={styles.post}>
@@ -61,18 +75,18 @@ export function Post({ author, content, publishedAt }: PostProps) {
 
       <div className={styles.content}>{contentFormatted}</div>
 
-      <form className={styles.commentForm}>
+      <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
 
-        <textarea placeholder="Comente aqui" />
+        <textarea name="comment" placeholder="Comente aqui" onChange={handleNewCommentChange} value={newCommentText}/>
 
         <button type="submit">Comentar</button>
       </form>
 
       <div className={styles.commentsList}>
-        <Comment />
-        <Comment />
-        <Comment />
+        {comments.map((comment) => {
+          return <Comment content={comment} />;
+        })}
       </div>
     </article>
   );
