@@ -39,19 +39,32 @@ export function Post({ author, content, publishedAt }: PostProps) {
   // condição para formatar o conteúdo do post, se o texto é um link ou um parágrafo em si
   const contentFormatted = content.map((item) => {
     if (item.type === "paragraph") {
-      return <p>{item.content}</p>;
+      return <p key={item.content}>{item.content}</p>;
     }
-    return <a href="#">{item.content}</a>;
+    return (
+      <a key={item.content} href="#">
+        {item.content}
+      </a>
+    );
   });
 
   function handleCreateNewComment() {
     event.preventDefault(); // previne o comportamento padrão do form, que é recarregar a página
+
+    if (!newCommentText) return; // se não tiver texto, não adiciona o comentário
+
     setComments([...comments, newCommentText]); // adiciona um novo comentário
+
     setNewCommentText(""); // limpa o input
   }
 
   function handleNewCommentChange() {
     setNewCommentText(event.target.value); // pega o valor do input e adiciona no estado
+  }
+
+  function deleteComment(comment: string) {
+    const commentsWithoutDeletedOne = comments.filter((item) => item !== comment); // filtra os comentários, excluindo o comentário deletado
+    setComments(commentsWithoutDeletedOne)
   }
 
   return (
@@ -78,14 +91,19 @@ export function Post({ author, content, publishedAt }: PostProps) {
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
         <strong>Deixe seu feedback</strong>
 
-        <textarea name="comment" placeholder="Comente aqui" onChange={handleNewCommentChange} value={newCommentText}/>
+        <textarea
+          name="comment"
+          placeholder="Comente aqui"
+          onChange={handleNewCommentChange}
+          value={newCommentText}
+        />
 
         <button type="submit">Comentar</button>
       </form>
 
       <div className={styles.commentsList}>
         {comments.map((comment) => {
-          return <Comment content={comment} />;
+          return <Comment key={comment} content={comment} onDeleteComment={deleteComment} />;
         })}
       </div>
     </article>

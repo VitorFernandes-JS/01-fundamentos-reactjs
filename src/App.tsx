@@ -17,15 +17,15 @@ const posts = [
       { type: "paragraph", content: "Olá!" },
       {
         type: "paragraph",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit1.",
       },
       {
         type: "paragraph",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit2.",
       },
       {
         type: "paragraph",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit3.",
       },
       { type: "link", content: "teste</a>" },
     ],
@@ -42,15 +42,15 @@ const posts = [
       { type: "paragraph", content: "Olá, Rede!" },
       {
         type: "paragraph",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit1.",
       },
       {
         type: "paragraph",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit2.",
       },
       {
         type: "paragraph",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit3.",
       },
       { type: "link", content: "teste1111111</a>" },
     ],
@@ -69,6 +69,7 @@ export function App() {
           {posts.map((post) => {
             return (
               <Post
+                key={post.id}
                 author={post.author}
                 content={post.content}
                 publishedAt={post.publishedAt}
