@@ -106,8 +106,14 @@
     max-width: none;
 }
 
-.commentForm button[type="submit"]:hover {
+.commentForm button[type="submit"]:not(disabled)hover {
     filter: brightness(0.9);
+}
+
+/* regra para mudar a estilização do botão caso o textarea esteja vazio */
+.commentForm button[type="submit"]:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 .commentsList {
