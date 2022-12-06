@@ -1,4 +1,5 @@
 import { ThumbsUp, Trash } from "phosphor-react";
+import { useState } from "react";
 import { Avatar } from "../Avatar/Avatar";
 import styles from "./Comment.module.css";
 
@@ -8,6 +9,19 @@ interface CommentProps {
 }
 
 export function Comment({ content, onDeleteComment }: CommentProps) {
+  const [likes, setLikes] = useState(0);
+  let like = 0;
+
+  function handleLikeComment() { // função para dar like no comentário ou remover o like
+    if (like === 1) {
+      like = 0;
+      setLikes(like);
+      return;
+    }
+    like = 1;
+    setLikes(like);
+  }
+
   function handleDeleteComment() {
     onDeleteComment(content);
   }
@@ -34,9 +48,9 @@ export function Comment({ content, onDeleteComment }: CommentProps) {
         </div>
 
         <footer>
-          <button>
+          <button onClick={handleLikeComment}>
             <ThumbsUp size={20} />
-            Aplaudir <span>05</span>
+            Aplaudir <span>{likes}</span>
           </button>
         </footer>
       </div>
