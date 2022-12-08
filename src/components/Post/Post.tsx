@@ -4,7 +4,12 @@ import { ptBR } from "date-fns/locale";
 import styles from "./Post.module.css";
 import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
+
+interface ContentProps {
+  type: "paragraph" | "link";
+  content: string;
+}
 
 interface PostProps {
   author: {
@@ -12,15 +17,12 @@ interface PostProps {
     name: string;
     role: string;
   };
-  content: {
-    type: string;
-    content: string;
-  }[];
+  content: ContentProps[];
   publishedAt: Date;
 }
 
 export function Post({ author, content, publishedAt }: PostProps) {
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(["Post bacana!", "Muito bom!"]);
   const [newCommentText, setNewCommentText] = useState("");
 
   const publishedDateFormatted = format(
@@ -48,7 +50,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
     );
   });
 
-  function handleCreateNewComment() {
+  function handleCreateNewComment(event: FormEvent) {
     event.preventDefault(); // previne o comportamento padrão do form, que é recarregar a página
     if (newCommentText.trim() === "") {
       return;
@@ -57,12 +59,8 @@ export function Post({ author, content, publishedAt }: PostProps) {
     setNewCommentText(""); // limpa o input
   }
 
-  function handleNewCommentChange() {
+  function handleNewCommentChange(event: ChangeEvent<HTMLTextAreaElement>) {
     setNewCommentText(event.target.value); // pega o valor do input e adiciona no estado
-  }
-
-  function handleNewCommentInvalid() {
-    console.log(event);
   }
 
   function deleteComment(comment: string) {
