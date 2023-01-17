@@ -6,18 +6,13 @@ import { Comment } from "../Comment/Comment";
 import { Avatar } from "../Avatar/Avatar";
 import { ChangeEvent, FormEvent, useState } from "react";
 
-interface ContentProps {
-  type: "paragraph" | "link";
-  content: string;
-}
-
 interface PostProps {
   author: {
     avatarUrl: string;
     name: string;
     role: string;
   };
-  content: ContentProps[];
+  content: any;
   publishedAt: Date;
 }
 
@@ -39,7 +34,7 @@ export function Post({ author, content, publishedAt }: PostProps) {
   });
 
   // condição para formatar o conteúdo do post, se o texto é um link ou um parágrafo em si
-  const contentFormatted = content.map((item) => {
+  const contentFormatted = content.map((item: any) => {
     if (item.type === "paragraph") {
       return <p key={item.content}>{item.content}</p>;
     }
